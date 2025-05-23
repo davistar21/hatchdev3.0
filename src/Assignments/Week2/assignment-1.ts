@@ -1,3 +1,12 @@
+/* 
+Library Management System
+
+Description:
+
+A simple system to manage books and members of a library using OOP principles. */
+
+
+
 class Book {
   constructor(
     public id: number,
@@ -23,11 +32,11 @@ class Library {
     this.members.push(member);
   }
 
-  lendBook(bookId: number, memberId: number): void {
+  lendBook(bookId: number, memberId: number, memberName: string): void {
     const book = this.books.find(b => b.id === bookId);
     if (book && book.isAvailable) {
       book.isAvailable = false;
-      console.log(`Book "${book.title}" lent to member ${memberId}`);
+      console.log(`Book "${book.title}" lent to member ${memberId}, ${memberName}`);
     } else {
       console.log(`Book not available or does not exist.`);
     }
@@ -54,7 +63,7 @@ const lib = new Library();
 lib.addBook(new Book(1, "1984", "George Orwell"));
 lib.addBook(new Book(2, "To Kill a Mockingbird", "Harper Lee"));
 lib.addMember(new Member(1, "Alice"));
-lib.lendBook(1, 1);
+lib.lendBook(1, 1, "Alice");
 lib.listBooks();
 lib.returnBook(1);
 lib.listBooks();

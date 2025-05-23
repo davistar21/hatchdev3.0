@@ -1,3 +1,8 @@
+/*  Simple Task Manager
+
+### Description:
+
+A task manager to create, update, complete, and list tasks. */
 class Task {
   constructor(
     public id: number,
