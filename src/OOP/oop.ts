@@ -167,3 +167,172 @@ console.log(Calculator.divide(2, 1))
 
 
 
+//CHATGPT EXAMPLE
+// Package.ts
+class Package {
+  weight: number;
+  contents: string;
+
+  constructor(weight: number, contents: string) {
+    this.weight = weight;
+    this.contents = contents;
+  }
+
+  getLabel(): string {
+    return `Package: ${this.contents}, ${this.weight}kg`;
+  }
+}
+
+// Route.ts
+class Route {
+  origin: string;
+  destination: string;
+  distance: number;
+
+  constructor(origin: string, destination: string, distance: number) {
+    this.origin = origin;
+    this.destination = destination;
+    this.distance = distance;
+  }
+
+  getSummary(): string {
+    return `From ${this.origin} to ${this.destination}, ${this.distance}km`;
+  }
+}
+
+// Driver.ts
+class Driver {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  getInfo(): string {
+    return `Driver: ${this.name}`;
+  }
+}
+
+// Vehicle.ts
+class Vehicle {
+  type: string;
+  maxLoad: number;
+
+  constructor(type: string, maxLoad: number) {
+    this.type = type;
+    this.maxLoad = maxLoad;
+  }
+
+  canCarry(pkg: Package): boolean {
+    return pkg.weight <= this.maxLoad;
+  }
+
+  getDetails(): string {
+    return `${this.type} (Max Load: ${this.maxLoad}kg)`;
+  }
+}
+
+// Delivery.ts (Composition Hub)
+class Delivery {
+  pkg: Package;
+  route: Route;
+  vehicle: Vehicle;
+  driver: Driver;
+
+  constructor(pkg: Package, route: Route, vehicle: Vehicle, driver: Driver) {
+    this.pkg = pkg;
+    this.route = route;
+    this.vehicle = vehicle;
+    this.driver = driver;
+  }
+
+  getDeliverySummary(): string {
+    return `
+--- Delivery Summary ---
+${this.pkg.getLabel()}
+${this.route.getSummary()}
+${this.vehicle.getDetails()}
+${this.driver.getInfo()}
+Status: ${this.vehicle.canCarry(this.pkg) ? "Ready for Delivery" : "Package too heavy!"}
+    `;
+  }
+}
+const pkg = new Package(50, "Electronics");
+const route = new Route("London", "Manchester", 320);
+const vehicle = new Vehicle("Truck", 100); // can carry 100kg
+const driver = new Driver("Alice Johnson");
+
+const delivery = new Delivery(pkg, route, vehicle, driver);
+
+console.log(delivery.getDeliverySummary());
+
+
+
+
+
+
+
+
+
+class MyArray {
+  private static validateArray(arr: any): asserts arr is any[] {
+    if (!Array.isArray(arr)) {
+      throw new Error("Input is not an array");
+    }
+  }
+  static isArray(arr: any): boolean {
+    return Array.isArray(arr);
+  }
+  static getLength(arr: any[]): number {
+    this.validateArray(arr);
+    return arr.length;
+  }
+  static getElement(arr: any[], index: number): any {
+    this.validateArray(arr);
+    if (index < 0 || index >= arr.length) {
+      throw new Error("Index out of bounds");
+    }
+    return arr[index];
+  }
+  static addElement(arr: any[], element: any): void {
+    this.validateArray(arr);
+    arr.push(element);
+  }
+  static map(arr: any[], callback: (element: any, index: number, array: any[]) => any): any[] {
+    this.validateArray(arr);
+    return arr.map(callback);
+  }
+  static filter(arr: any[], callback: (element: any, index: number, array: any[]) => boolean) : any[] {
+    this.validateArray(arr); 
+    return arr.filter(callback)
+  }
+  static find (arr: any[], callback: (element: any, index: number, array: any[]) => boolean): any {
+    this.validateArray(arr);
+    return arr.find(callback);
+  }
+  static splice(arr: any[], start: number, deleteCount: number, ...items: any[]): any[] {
+    this.validateArray(arr);
+    return arr.splice(start, deleteCount, ...items);
+  }
+}
+
+const newArray: string | number [] = [1, 2, 3, 4, 5];
+MyArray.addElement(newArray, 6);
+MyArray.map(newArray, (element) => element * 2);
+MyArray.filter(newArray, (element) => element > 3);
+MyArray.find(newArray, (element) => element === 3);
+MyArray.splice(newArray, 2, 1, 7);
+console.log(newArray);
+console.log(`Length of array: ${MyArray.getLength(newArray)}`);
+console.log(`Element at index 2: ${MyArray.getElement(newArray, 2)}`);
+
+
+
+
+//AGGREGRATION EXAMPLE
+//Aggregation refers to a special form of association where one class contains a reference to another class, but the contained class can exist independently of the container class. This is often used to model a "has-a" relationship.
+
+type Address = {
+  street: string;
+}
+
