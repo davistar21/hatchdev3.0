@@ -336,3 +336,172 @@ type Address = {
   street: string;
 }
 
+
+
+interface IOrdinal {
+  number: number,
+  ordinal: string,
+  words: string
+}
+const ordinals:IOrdinal[] = [
+  {
+    number: 1,
+    ordinal: 'first',
+    words: 'one'
+  }, {
+    number: 2,
+    ordinal: 'second',
+    words: 'two'
+  }, {
+    number: 3,
+    ordinal: 'third',
+    words: 'three'
+  }, {
+    number: 4,
+    ordinal: 'fourth',
+    words: 'four'
+  }, {
+    number: 5,
+    ordinal: 'fifth',
+    words: 'five'
+  }, {
+    number: 6,
+    ordinal: 'sixth',
+    words: 'six'
+  }, {
+    number: 7,
+    ordinal: 'seventh',
+    words: 'seven'
+  }, {
+    number: 8,
+    ordinal: 'eighth',
+    words: 'eight'
+  }, {
+    number: 9,
+    ordinal: 'ninth',
+    words: 'nine'
+  }, {
+    number: 10,
+    ordinal: 'tenth',
+    words: 'ten'
+  }, {
+    number: 11,
+    ordinal: 'eleventh',
+    words: 'eleven'
+  }, {
+    number: 12,
+    ordinal: 'twelfth',
+    words: 'twelve'
+  }, {
+    number: 13,
+    ordinal: 'thirteenth',
+    words: 'thirteen'
+  }, {
+    number: 14,
+    ordinal: 'fourteenth',
+    words: 'fourteen'
+  }, {
+    number: 15,
+    ordinal: 'fifteenth',
+    words: 'fifteen'
+  }, {
+    number: 16,
+    ordinal: 'sixteenth',
+    words: 'sixteen'
+  }, {
+    number: 17,
+    ordinal: 'seventeenth',
+    words: 'seventeen'
+  }, {
+    number: 18,
+    ordinal: 'eighteenth',
+    words: 'eighteen '
+  }, {
+    number: 19,
+    ordinal: 'nineteenth ',
+    words: 'nineteen '
+  }, {
+    number: 20,
+    ordinal: 'twentieth ',
+    words: 'twenty '
+  }, {
+    number: 30,
+    ordinal: 'thirtieth',
+    words: 'thirty '
+  }, {
+    number: 40,
+    ordinal: 'thirtieth',
+    words: 'forty '
+  }, {
+    number: 50,
+    ordinal: 'thirtieth',
+    words: 'fifty '
+  }, {
+    number: 60,
+    ordinal: 'thirtieth',
+    words: 'sixty '
+  }, {
+    number: 70,
+    ordinal: 'thirtieth',
+    words: 'seventy '
+  }, {
+    number: 80,
+    ordinal: 'thirtieth',
+    words: 'eighty '
+  }, {
+    number: 90,
+    ordinal: 'thirtieth',
+    words: 'ninety '
+  }, {
+    number: 100,
+    ordinal: 'thirtieth',
+    words: 'hundred '
+  }, {
+    number: 30,
+    ordinal: 'thirtieth',
+    words: 'thirty '
+  }, {
+    number: 30,
+    ordinal: 'thirtieth',
+    words: 'thirty '
+  }, {
+    number: 30,
+    ordinal: 'thirtieth',
+    words: 'thirty '
+  }
+  
+]
+class Numberify {
+  static findWord (number: number) :string {
+    return (ordinals.find(e => e.number == number))?.words || ''
+  }
+  static wordify(number: number) : string {
+    let finalWord:string = this.findWord(number)
+    let tenCount: number = 0;
+    let remainder: number = 0;
+    if (number > 20) {
+      tenCount = Math.floor(number / 10);
+      finalWord = this.findWord(tenCount * 10);
+      remainder = number - tenCount * 10;
+      finalWord += this.findWord(remainder)
+    } 
+
+    if (number > 100) {
+      let hundredCount = Math.floor(number /100);
+      finalWord = `${this.findWord(hundredCount)} ${this.findWord(hundredCount * 100)}`
+      remainder = number - hundredCount * 100;
+      if (tenCount > 20) {
+        tenCount = Math.floor( remainder / 10);
+        finalWord += this.findWord(tenCount * 10)
+        finalWord += this.findWord(tenCount - tenCount * 10 )
+      } 
+    }
+
+
+    return finalWord || 'Number not yet found.';
+  }
+}
+
+const g = new Numberify()
+
+console.log(Numberify.wordify(102))
