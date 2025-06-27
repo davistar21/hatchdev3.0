@@ -59,7 +59,7 @@ console.log(array.reverse())
 
 
 interface ISong {
-  id?: string;
+  id?: string; // optional, default to a random string if not provided
   title: string;
   artist: string;
   duration?: number; // in seconds
@@ -68,7 +68,7 @@ interface ISong {
 
 class Song{
   constructor({
-    id = '',
+    id = `Song-${Math.random().toString(36).substring(2, 15)}`, // default id if not provided
     title,
     artist,
     duration = 0,
@@ -102,26 +102,31 @@ class MusicPlaylist {
   }
   resetId() {
     this.songs.forEach((song, index) => {
-      song.id = `Song-${index + 1}`;
+      song.id = `${index + 1}`
     })
   }
   displayPlaylist() {
     this.songs.forEach(song => {
-      console.log(`${song.id}, Title: ${song.title}, Artist: ${song.artist}, Duration: ${song.duration} seconds, Genre: ${song.genre}`);
+      console.log(`SOng ${song.id}, Title: ${song.title}, Artist: ${song.artist}, Duration: ${song.duration} seconds, Genre: ${song.genre}`);
     });
+  }
+  shuffle () {
+    this.songs = shuffleArray(this.songs);
+    this.resetId();
+    return this.songs;
   }
 }
 
 const mySongs = [
   {
-    title: 'Song One',
-    artist: 'Artist A',
+    title: 'Hello World',
+    artist: 'John Doe',
     duration: 240,
     genre: 'Pop'
   },
   {
-    title: 'Song Two',
-    artist: 'Artist B',
+    title: 'Earth',
+    artist: 'Organic Band',
     duration: 180,
     genre: 'Rock'
   }
@@ -129,4 +134,25 @@ const mySongs = [
 
 const firstPlaylist = new MusicPlaylist(mySongs);
 
+firstPlaylist.addSong(new Song({
+  title: 'New Horizons',
+  artist: 'Future Sounds',
+  duration: 300,
+  genre: 'Electronic'
+}))
+firstPlaylist.shuffle()
+
+firstPlaylist.removeSong('Song-1')
+
 firstPlaylist.displayPlaylist()
+
+
+function shuffleArray(array: any[]) : any[] {
+  for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+
