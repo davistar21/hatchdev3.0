@@ -111,3 +111,7 @@ class StackLL<T> {
 
 
 //implement circular, implement stack and queue, list the applications of each
+
+
+
+// depth first search, breadth first search

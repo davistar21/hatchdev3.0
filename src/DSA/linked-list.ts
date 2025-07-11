@@ -90,6 +90,9 @@ class SLL<T> {
     this.length++;
   }
   remove (index: number) {
+    if (index == 0) {
+      
+    }
     //traverse to the node before the index
     const prevNode = this.traverseToIndex(index - 1);
     //save the node to delete
