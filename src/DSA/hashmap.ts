@@ -171,3 +171,180 @@ class MainHashMap<K, V>{
     }
   }
 }
+
+
+function targetSum(arr: number[], target: number): number[] {
+  let result: number[] = [];
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] + arr[j] === target) {
+        result.push(arr[i], arr[j]);
+      }
+    }
+  }
+  return result
+}
+
+console.log(targetSum([1, 2, 3, 4, 5], 7))
+
+
+/**
+ * Missing Number 268
+ * Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+ * Group Anagrams 49
+ * Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+ * TwoSum 1
+ * Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+ * You may assume that each input would have exactly one solution, and you may not use the same element twice. 
+ * You can return the answer in any order.
+ * Isomorphic Strings 205
+ * Given two strings s and t, determine if they are isomorphic.
+ */
+
+
+let testArray:number[] = [0, 1, 3, 4];
+function generateMissingNumberArray(n:number):number[]{
+  let arr:number[] = [0];
+  for (let i = 0; i < n; i++) {
+    arr.push(i+1)
+  }
+
+  arr.splice(Math.floor(Math.random()*n), 1)
+  return arr
+}
+function returnMissingNumber(arr: number[]): number{
+  let missingNumber:number = 0;
+  arr.sort((a, b) => a-b)
+  for (let i=0; i<arr.length;i++){
+    if (arr[i]+1!==arr[i+1]) {
+      missingNumber = arr[i]+1
+      return missingNumber
+    }
+  }
+  return 0
+}
+console.log(returnMissingNumber(testArray))
+console.log('Generated Missing Number: ', returnMissingNumber(generateMissingNumberArray(7)))
+
+function missingNumber(nums: number[]): number {
+    const numSet = new Set<number>(nums);
+    const n = nums.length;
+    for (let i = 0; i <= n; i++) {
+        if (!numSet.has(i)) {
+            return i;
+        }
+    }
+    return -1;
+}
+function missingNumberT(nums: number[]): number {
+    const numMap: Record<number, boolean> = {};
+
+    // Fill the map with existing numbers
+    for (const num of nums) {
+        numMap[num] = true;
+    }
+
+    const n = nums.length;
+
+    // Check which number from 0 to n is missing
+    for (let i = 0; i <= n; i++) {
+        if (!(i in numMap)) {
+            return i;
+        }
+    }
+
+    // Should never reach here if constraints are guaranteed
+    return -1;
+}
+
+
+let testStrings:string[] = ['eat', 'ate', 'foo', 'oof', 'tea', 'arc', 'car', 'bea', 'abe', 'aet', 'eta', 'ofo', 'june'];
+function groupAnagrams(arr: string[]) :any[]|string[]|number[]|Map<string, string[]>{
+  let map = new Map<string, string[]>();
+  let finalArr:any[] = [];
+  let keys = new Set()
+  arr.forEach(str => {
+    let key = 0
+    for (const letter of str) {
+      key += letter.charCodeAt(0)
+    }
+    keys.add(String(key))
+    if (!map.has(String(key))) {
+      map.set(String(key), [str])
+    } else {
+      (map.get(String(key)))?.push(str)
+    }
+  })
+  keys.forEach(key => {
+    finalArr.push(map.get(String(key)))
+  })
+  return finalArr
+}
+function groupAnagramsT(strs: string[]): string[][] {
+    const map = new Map<string, string[]>();
+    for (const str of strs) {
+        const count = new Array(26).fill(0);
+
+        for (const char of str) {
+            count[char.charCodeAt(0) - 97]++;
+        }
+        const key = count.join('#'); // Join counts to create a unique key
+        if (!map.has(key)) {
+            map.set(key, []);
+        }
+        map.get(key)!.push(str);
+    }
+    return Array.from(map.values());
+}
+
+
+console.log('a'.charCodeAt(0))
+console.log(groupAnagrams(testStrings))
+
+function isIsomoprhic(s:string, t:string): boolean|Map<any,any> { // app -> egg, food -> seep
+  if (s.length !== t.length) return false;
+  let s_map = new Map();
+  let t_map = new Map()
+  for (const index in [...s]) s_map.set(s[index], t[index])
+  for (const index in [...t]) t_map.set(t[index], s[index])
+  return s_map.size == t_map.size
+}
+console.log(isIsomoprhic('a', 'ab'))
+console.log(isIsomoprhic('app', 'egg'))
+console.log(isIsomoprhic('food', 'seep'))
+console.log(isIsomoprhic('badc', 'baba'))
+console.log(isIsomoprhic('baba', 'badc'))
+
+function multiple(num:number):any|any[] {
+  if (num < 0) return []
+  
+  if (num % 2 == 0) {
+    return [2, ...multiple(num/2)]
+  }
+  if (num % 3 == 0) {
+    return [3, ...multiple(num/3)]
+  }
+  if (num % 5 == 0) {
+    return [5, ...multiple(num/5)]
+  }
+  if (num % 7 == 0) {
+    return [7, ...multiple(num/7)]
+  }
+  return []
+}
+console.log(multiple(90))
+
+
+function twoSum(nums:number[], target:number) :number[] {
+  let map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    if (map.has(target-nums[i])) return [map.get(target-nums[i]), i]
+    map.set(nums[i], i)
+  }
+  return [-1]
+}
+console.log(twoSum([6, 8, 9], 17))
+console.log(generateMissingNumberArray(9))
+
+
+
