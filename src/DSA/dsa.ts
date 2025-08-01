@@ -225,6 +225,4 @@ for (let i = arr0.length - 1; i > 0; i--) {
   [arr0[i], arr0[j]] = [arr0[j], arr0[i]];
   console.log(i)
 }
-console.log(arr0)
-
 
