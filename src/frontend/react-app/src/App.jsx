@@ -1,35 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function HelloWorld() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+    <main>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <p>Reading</p>
+        <p>Published today</p>
+        <img src="https://cdn.britannica.com/16/198816-050-AF8B7B3C/Erwin-Schrodinger.jpg" alt=""/> 
+        <h1>Life and Times of Erwin Schrodinger</h1>
+        <h3>A scientist of remarkable mental prowess, he pioneered the concept of quantum mechanics as we know it today.</h3>
+        <h4>By Tayo</h4>
+        <p>Published on 2023-10-01</p>
+        <p>Updated on 2023-10-01</p>
+        <p>Tags: Science, Physics, Quantum Mechanics</p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </main>
   )
 }
-
-export default App
