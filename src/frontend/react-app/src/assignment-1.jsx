@@ -2,7 +2,7 @@ const ProfileCard = () => {
   return (
     <div className="card">
       <header>
-        <img src="./assets/assignment-1/images/avatar-jessica.jpeg" alt="" />
+        <img src=".././assets/assignment-1/images/avatar-jessica.jpeg" alt="" />
         <h1>Jessica Randall</h1>
         <h3>London, United Kingdom</h3>
         <h4>"Front-end developer and avid reader."</h4>
