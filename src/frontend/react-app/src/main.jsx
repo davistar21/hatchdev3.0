@@ -1,10 +1,11 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
-import HelloWorld from './App.jsx'
+import ProfileCard from './assignment-1';
+import './styles/assignment-1.css'
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <HelloWorld />
-  </StrictMode>,
+const root = createRoot(document.querySelector("#root"));
+
+root.render(
+  <div>
+    <ProfileCard />
+  </div>
 )
