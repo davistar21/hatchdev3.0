@@ -113,3 +113,26 @@ console.log(corr_reg(
 [1, 4, 9, 23, 34, 56, 67, 90],
 [2, 5, 6, 32, 34, 58, 80, 102]
 ))
+
+
+function log(number: number, n:number = log_integer(number)) : number {
+  if (10**n >= number) return n;
+  n += 0.001;
+  return log(number, n);
+}
+
+console.log("logarithm of 102 is ", log(3))
+console.log(10**log(3))
+function log_integer(number: number): number{
+  let n: number = 0;
+  while (number >= 10**n){
+    n += 1
+  }
+  return n-1;
+}
+
+
+[0, 1, 2, 3, 4, 5].forEach(e => {
+  console.log('P(X =', e, ') = ', binompdf(80, 0.01, e))
+})
+console.log('P(X >= 1) = ', 1 - binompdf(50, 0.042, 0))

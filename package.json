@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --respawn --transpile-only src/DSA/sorting-algorithms.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/statistics.ts"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +15,8 @@
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "react-hook-form": "^7.63.0"
   }
 }
