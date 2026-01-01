@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import User, { UserProps } from "./components/user";
+import Product, { ProductProps } from "@/app/components/product";
 import axios from "axios";
 export default function Home() {
-  const [users, setUsers] = useState<null | UserProps[]>(null);
+  const [products, setProducts] = useState<null | ProductProps[]>(null);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     (async () => {
@@ -13,9 +13,9 @@ export default function Home() {
         const res = await axios.get("https://api.mockrest.com/products");
         if (!res.data) return;
 
-        setUsers(res.data.slice(0, 6));
+        setProducts(res.data.slice(0, 6));
       } catch (err) {
-        console.error("Failed to get users", err);
+        console.error("Failed to get products", err);
         setLoading(false);
       } finally {
         setLoading(false);
@@ -26,7 +26,8 @@ export default function Home() {
   return (
     <div className="font-sans grid grid-cols-1 md:grid-cols-3 gap-16 p-12">
       {loading && <div className="loader"></div>}
-      {users && users.map((user) => <User {...user} />)}
+      {products &&
+        products.map((product) => <Product {...product} key={product.id} />)}
     </div>
   );
 }
